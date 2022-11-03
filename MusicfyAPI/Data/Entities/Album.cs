@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicfyAPI.Data.Entities
 {
-    public class Album
+    public class Album: EntityBase
     {
         [Key]
         public int Id { get; set; }
@@ -18,12 +18,12 @@ namespace MusicfyAPI.Data.Entities
         public bool IsSingle { get; set; }
         public string Country { get; set; }
 
-
-        [JsonIgnore]
+    [JsonIgnore]
         public virtual Artist Artist { get; set; }
         [JsonIgnore]
         public virtual  List<Song> Songs { get; set; }
 
 
     }
+
 }

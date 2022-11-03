@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MusicfyAPI.Data;
 using MusicfyAPI.Data.Entities;
 
@@ -34,7 +35,7 @@ namespace MusicfyAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var albums = dbContext.Albums;
+            var albums = dbContext.Albums.Where(t => t.IsDeleted == false); 
             if (albums == null) return NotFound(new BaseAPIResponse()
             {
                 IsSuccess = false,
@@ -68,7 +69,7 @@ namespace MusicfyAPI.Controllers
                 IsSuccess = false,
                 Message = "You Have Entered Invalid Id"
             });
-            var album = dbContext.Albums.SingleOrDefault(a => a.Id == id.Value);
+            var album = dbContext.Albums.SingleOrDefault(t => t.Id == id.Value && t.IsDeleted == false);
             if (album == null) return NotFound(new BaseAPIResponse()
             {
                 Message = $"{id.Value} not found"
@@ -96,32 +97,47 @@ namespace MusicfyAPI.Controllers
         /// </remarks>
         /// <response code="200"></response>
         [HttpPost]
-        public IActionResult Post([FromBody]Album album)
+        public IActionResult Post([FromBody] Album album)
         {
-            if (album == null) return BadRequest(new BaseAPIResponse()
+
+            var albums = dbContext.Albums.Where(t => t.IsDeleted == false);
+
+            if (albums.Count() <= 20)
             {
-                Message = "Cannot be blank",
-                IsSuccess = false
-            });
-            dbContext.Albums.Add(album);
-            try
-            {
-                dbContext.SaveChanges();
-                return Ok(new BaseAPIResponse()
+                if (album == null) return BadRequest(new BaseAPIResponse()
                 {
-                    IsSuccess = true,
-                    Result = album,
-                    Message = "Successfully added"
+                    Message = "Cannot be blank",
+                    IsSuccess = false
                 });
+                dbContext.Albums.Add(album);
+                try
+                {
+                    dbContext.SaveChanges();
+                    return Ok(new BaseAPIResponse()
+                    {
+                        IsSuccess = true,
+                        Result = album,
+                        Message = "Successfully added"
+                    });
+                }
+                catch
+                {
+                    return BadRequest(new BaseAPIResponse()
+                    {
+                        Message = "Something went wrong",
+                        IsSuccess = false
+                    });
+                }
             }
-            catch
+            else
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Something went wrong",
+                    Message = "Maximum length is 20 albums",
                     IsSuccess = false
                 });
             }
+
         }
 
         /// <summary>
@@ -194,10 +210,13 @@ namespace MusicfyAPI.Controllers
                 Message = "You Have Entered Invalid Id"
             });
 
-            dbContext.Albums.Remove(new Album()
+
+            Album newAlbum = new()
             {
-                Id = id.Value
-            });
+                Id = id.Value,
+                IsDeleted = true                 
+        };
+            dbContext.Albums.Update(newAlbum);
 
             try
             {

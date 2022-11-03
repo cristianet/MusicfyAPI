@@ -51,7 +51,8 @@ namespace MusicfyAPI.Migrations
                     Country = table.Column<string>(nullable: true),
                     IsSingle = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    ReleaseYear = table.Column<int>(nullable: false)
+                    ReleaseYear = table.Column<int>(nullable: false),
+                    isDelete = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
