@@ -59,7 +59,7 @@ namespace MusicfyAPI
                     Contact = new OpenApiContact
                     {
                         Name = "Documentation Project",
-                        Url = new Uri("www.github.com/cristianet")
+                        Url = new Uri("http://www.github.com/cristianet")
                     }
                 });
                 c.DescribeAllParametersInCamelCase();
@@ -121,10 +121,6 @@ namespace MusicfyAPI
             });
         }
 
-        //public void ConfigureServices(IServiceCollection services)
-        //{
-        //    services.AddControllers();
-        //}
 
 
 
