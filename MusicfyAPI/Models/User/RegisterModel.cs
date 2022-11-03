@@ -8,21 +8,21 @@ namespace MusicfyAPI.Models.User
 {
     public class RegisterModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Adınız boş geçilemez")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Your name is Cannot be blank")]
         public string FirstName { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Soyadınız boş geçilemez")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Your Firts Cannot be blank")]
         public string LastName { get; set; }
 
-        [MinLength(5, ErrorMessage = "Lütfen en az 5 karakterli kullanıcı adı giriniz.")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Kullanıcı adı boş geçilemez")]
+        [MinLength(5, ErrorMessage = "Please enter a username of at least 5 characters.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Kullanıcı adı Cannot be blank")]
         public string UserName { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Emailiniz boş geçilemez")]
-        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Geçersiz E-Mail Adres")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Your Email Cannot be blank")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Invalid E-Mail Address")]
         public string Email { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Şifre boş geçilemez")]
-        [MaxLength(32, ErrorMessage = "Lütfen şifrenizi 8 ile 32 karakter arasında giriniz.")]
-        [MinLength(8, ErrorMessage = "Lütfen şifrenizi 8 ile 32 karakter arasında giriniz.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password Cannot be blank")]
+        [MaxLength(32, ErrorMessage = "Please enter your password between 8 and 32 characters.")]
+        [MinLength(8, ErrorMessage = "Please enter your password between 8 and 32 characters.")]
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
     }

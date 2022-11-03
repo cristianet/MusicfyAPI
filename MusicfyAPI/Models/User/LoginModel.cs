@@ -8,13 +8,13 @@ namespace MusicfyAPI.Models.User
 {
     public class LoginModel
     {
-        [MinLength(5,ErrorMessage ="Lütfen en az 5 karakterli kullanıcı adı giriniz.")]
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Kullanıcı adı boş geçilemez")]
+        [MinLength(5,ErrorMessage = "Please enter a username of at least 5 characters.")]
+        [Required(AllowEmptyStrings =false,ErrorMessage = "Username Cannot be Empty")]
         public string Username { get; set; }
 
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Şifre boş geçilemez")]
-        [MaxLength(32,ErrorMessage ="Lütfen şifrenizi 8 ile 32 karakter arasında giriniz.")]
-        [MinLength(8,ErrorMessage ="Lütfen şifrenizi 8 ile 32 karakter arasında giriniz.")]
+        [Required(AllowEmptyStrings =false,ErrorMessage = "Password Cannot be Blank")]
+        [MaxLength(32,ErrorMessage = "Please enter your password between 8 and 32 characters.")]
+        [MinLength(8,ErrorMessage = "Please enter your password between 8 and 32 characters.")]
         public string Password { get; set; }
     }
 }

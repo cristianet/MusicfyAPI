@@ -27,7 +27,7 @@ namespace MusicfyAPI.Controllers
             var user = dbContext.Users.SingleOrDefault(u => u.UserName == loginModel.Username && u.Password == loginModel.Password);
             if (user == null) return NotFound(new BaseAPIResponse()
             {
-                Message = "Kullanıcı Bulunamadı",
+                Message = "User not found",
                 IsSuccess = false
             });
 
@@ -35,13 +35,13 @@ namespace MusicfyAPI.Controllers
             if (string.IsNullOrEmpty(token)) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Token üretilirken bir hata oluştu"
+                Message = "While generating the token something went wrong"
             });
 
             return Ok(new BaseAPIResponse()
             {
                 IsSuccess = true,
-                Message = "Giriş yapıldı",
+                Message = "Signed in",
                 Result = new
                 {
                     AccessToken = token
@@ -59,7 +59,7 @@ namespace MusicfyAPI.Controllers
             if (isRegister) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Bu kullanıcı zaten kayıtlı"
+                Message = "This user is already registered"
             });
 
             dbContext.Users.Add(new Data.Entities.User()
@@ -78,7 +78,7 @@ namespace MusicfyAPI.Controllers
                 return Ok(new BaseAPIResponse()
                 {
                     IsSuccess = true,
-                    Message = "Kaydedildi"
+                    Message = "Was recorded"
                 });
             }
             catch
@@ -86,7 +86,7 @@ namespace MusicfyAPI.Controllers
                 return BadRequest(new BaseAPIResponse()
                 {
                     IsSuccess = false,
-                    Message = "Kayıt olurken bir hata oluştu"
+                    Message = "While registering something went wrong"
                 });
             }
         }
