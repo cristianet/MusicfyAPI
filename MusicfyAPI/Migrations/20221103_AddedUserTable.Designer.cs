@@ -22,7 +22,7 @@ namespace MusicfyAPI.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Album", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Album", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -46,7 +46,7 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Artist", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Artist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -66,7 +66,7 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Featuring", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Featuring", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -84,7 +84,7 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Featurings");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Genre", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -96,7 +96,7 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Lyric", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Lyric", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -114,7 +114,7 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Lyrics");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Song", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Song", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -142,7 +142,7 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.User", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -166,48 +166,48 @@ namespace MusicfyAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Album", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Album", b =>
                 {
-                    b.HasOne("MusicDatabase.API.Data.Entities.Artist", "Artist")
+                    b.HasOne("MusicfyAPI.Data.Entities.Artist", "Artist")
                         .WithMany("Albums")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Featuring", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Featuring", b =>
                 {
-                    b.HasOne("MusicDatabase.API.Data.Entities.Artist", "Artist")
+                    b.HasOne("MusicfyAPI.Data.Entities.Artist", "Artist")
                         .WithMany("Featurings")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MusicDatabase.API.Data.Entities.Song", "Song")
+                    b.HasOne("MusicfyAPI.Data.Entities.Song", "Song")
                         .WithMany("Featurings")
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Lyric", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Lyric", b =>
                 {
-                    b.HasOne("MusicDatabase.API.Data.Entities.Song", "Song")
+                    b.HasOne("MusicfyAPI.Data.Entities.Song", "Song")
                         .WithMany("Lyrics")
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MusicDatabase.API.Data.Entities.Song", b =>
+            modelBuilder.Entity("MusicfyAPI.Data.Entities.Song", b =>
                 {
-                    b.HasOne("MusicDatabase.API.Data.Entities.Album", "Album")
+                    b.HasOne("MusicfyAPI.Data.Entities.Album", "Album")
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MusicDatabase.API.Data.Entities.Artist", "Artist")
+                    b.HasOne("MusicfyAPI.Data.Entities.Artist", "Artist")
                         .WithMany("Songs")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MusicDatabase.API.Data.Entities.Genre", "Genre")
+                    b.HasOne("MusicfyAPI.Data.Entities.Genre", "Genre")
                         .WithMany("Songs")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade);

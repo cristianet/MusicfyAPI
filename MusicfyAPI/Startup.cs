@@ -67,8 +67,7 @@ namespace MusicfyAPI
 
             services.AddMvc();
             services.AddControllers();
-
-            //AddSwagger(services);
+            
 
             services.AddDbContext<MusicDbContext>(options =>
             {
@@ -98,29 +97,6 @@ namespace MusicfyAPI
                 };
             });
         }
-
-
-        private void AddSwagger(IServiceCollection services)
-        {
-            services.AddSwaggerGen(options =>
-            {
-                var groupName = "v1";
-
-                options.SwaggerDoc(groupName, new OpenApiInfo
-                {
-                    Title = $"Foo {groupName}",
-                    Version = groupName,
-                    Description = "Foo API",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Foo Company",
-                        Email = string.Empty,
-                        Url = new Uri("https://foo.com/"),
-                    }
-                });
-            });
-        }
-
 
 
 
