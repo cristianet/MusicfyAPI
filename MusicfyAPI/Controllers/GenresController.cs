@@ -26,7 +26,7 @@ namespace MusicfyAPI.Controllers
             var genres = dbContext.Genres;
             if (genres == null) return NotFound(new BaseAPIResponse()
             {
-                Message = "Herhangi bir veri yok"
+                Message = "No Data"
             });
             return Ok(new BaseAPIResponse()
             {
@@ -42,13 +42,13 @@ namespace MusicfyAPI.Controllers
             if (!id.HasValue) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Geçersiz Id Girdiniz"
+                Message = "You Have Entered Invalid Id"
             });
 
             var genre = dbContext.Genres.SingleOrDefault(g => g.Id == id.Value);
             if (genre == null) return NotFound(new BaseAPIResponse()
             {
-                Message = $"{id.Value} bulunamadı"
+                Message = $"{id.Value} not found"
             });
 
             return Ok(new BaseAPIResponse()
@@ -64,7 +64,7 @@ namespace MusicfyAPI.Controllers
         {
             if (genre == null) return BadRequest(new BaseAPIResponse()
             {
-                Message = "Boş geçilemez",
+                Message = "Cannot be blank",
                 IsSuccess = false
             });
             dbContext.Genres.Add(genre);
@@ -75,14 +75,14 @@ namespace MusicfyAPI.Controllers
                 {
                     IsSuccess = true,
                     Result = genre,
-                    Message = "Başarıyla eklendi"
+                    Message = "Successfully added"
                 });
             }
             catch 
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Bir hata oluştu",
+                    Message = "Something went wrong",
                     IsSuccess = false
                 });
             }
@@ -95,7 +95,7 @@ namespace MusicfyAPI.Controllers
             if (!id.HasValue) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Geçersiz Id Girdiniz"
+                Message = "You Have Entered Invalid Id"
             });
             newGenre.Id = id.Value;
             dbContext.Genres.Update(newGenre);
@@ -106,14 +106,14 @@ namespace MusicfyAPI.Controllers
                 {
                     IsSuccess = true,
                     Result = newGenre,
-                    Message = "Güncellendi"
+                    Message = "Updated"
                 });
             }
             catch 
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Bir hata oluştu",
+                    Message = "Something went wrong",
                     IsSuccess = false
                 });
             }
@@ -126,7 +126,7 @@ namespace MusicfyAPI.Controllers
             if (!id.HasValue) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Geçersiz Id Girdiniz"
+                Message = "You Have Entered Invalid Id"
             });
             dbContext.Genres.Remove(new Genre()
             {
@@ -138,14 +138,14 @@ namespace MusicfyAPI.Controllers
                 return Ok(new BaseAPIResponse()
                 {
                     IsSuccess = true,
-                    Message = "Başarıyla silindi"
+                    Message = "Successfully deleted"
                 });
             }
             catch 
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Bir hata oluştu",
+                    Message = "Something went wrong",
                     IsSuccess = false
                 });
             }

@@ -18,18 +18,16 @@ namespace MusicfyAPI.Controllers
         {
             this.dbContext = dbContext;
         }
-        
+
         /// <summary>
-        /// GetAlbum
+        /// Get Album
         /// </summary>
-        /// <returns>Seller details.</returns>
+        /// <returns>All Albums</returns>
         /// <remarks>
         /// Sample request:
         ///
-        ///     By name (type)
-        ///     GET api/Seller/search/name/enco
-        ///     By id (type)
-        ///     GET api/Seller/search/id/CL-SELLER-788
+        ///     
+        ///     GET api/Albums
         ///     
         /// </remarks>
         /// <response code="200"></response>
@@ -40,7 +38,7 @@ namespace MusicfyAPI.Controllers
             if (albums == null) return NotFound(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Herhangi bir veri yok"
+                Message = "No Data"
             });
             return Ok(new BaseAPIResponse()
             {
@@ -50,17 +48,15 @@ namespace MusicfyAPI.Controllers
         }
 
         /// <summary>
-        /// GetAlbum
+        /// Get Album by Id
         /// </summary>
-        /// <param name="id" type="int">Seller name or id</param>
-        /// <returns>Seller details.</returns>
+        /// <param name="id" type="int">Id Album</param>
+        /// <returns>Album by Id</returns>
         /// <remarks>
         /// Sample request:
         ///
-        ///     By name (type)
-        ///     GET api/Seller/search/name/enco
-        ///     By id (type)
-        ///     GET api/Seller/search/id/CL-SELLER-788
+        ///     By Id (int)
+        ///     GET api/Albums
         ///     
         /// </remarks>
         /// <response code="200"></response>
@@ -70,12 +66,12 @@ namespace MusicfyAPI.Controllers
             if (!id.HasValue) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Geçersiz Id Girdiniz"
+                Message = "You Have Entered Invalid Id"
             });
             var album = dbContext.Albums.SingleOrDefault(a => a.Id == id.Value);
             if (album == null) return NotFound(new BaseAPIResponse()
             {
-                Message = $"{id.Value} bulunamadı"
+                Message = $"{id.Value} not found"
             });
 
             return Ok(new BaseAPIResponse()
@@ -84,14 +80,27 @@ namespace MusicfyAPI.Controllers
                 Result = album
             });
         }
-        
-        // POST: api/Albums
+
+        /// <summary>
+        /// Add Album
+        /// </summary>
+        /// <param name="album" type="Album">Album Info</param>
+        /// <returns>Album by Id</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     Send Object Album
+        ///    
+        ///     POST api/Albums
+        ///     
+        /// </remarks>
+        /// <response code="200"></response>
         [HttpPost]
         public IActionResult Post([FromBody]Album album)
         {
             if (album == null) return BadRequest(new BaseAPIResponse()
             {
-                Message = "Boş geçilemez",
+                Message = "Cannot be blank",
                 IsSuccess = false
             });
             dbContext.Albums.Add(album);
@@ -102,27 +111,41 @@ namespace MusicfyAPI.Controllers
                 {
                     IsSuccess = true,
                     Result = album,
-                    Message = "Başarıyla eklendi"
+                    Message = "Successfully added"
                 });
             }
             catch
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Bir hata oluştu",
+                    Message = "Something went wrong",
                     IsSuccess = false
                 });
             }
         }
-        
-        // PUT: api/Albums/5
+
+        /// <summary>
+        /// Update Album
+        /// </summary>
+        /// <param name="id" type="int">Id Album</param>
+        /// <param name="newAlbum" type="Album">Album Info</param>
+        /// <returns>Album</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     Send Object Album
+        ///    
+        ///     PUT api/Albums/5
+        ///     
+        /// </remarks>
+        /// <response code="200"></response>
         [HttpPut("{id}")]
         public IActionResult Put(int? id, [FromBody]Album newAlbum)
         {
             if (!id.HasValue) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Geçersiz Id Girdiniz"
+                Message = "You Have Entered Invalid Id"
             });
 
             newAlbum.Id = id.Value;
@@ -135,27 +158,40 @@ namespace MusicfyAPI.Controllers
                 {
                     IsSuccess = true,
                     Result = newAlbum,
-                    Message = "Güncellendi"
+                    Message = "Updated"
                 });
             }
             catch (Exception)
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Bir hata oluştu",
+                    Message = "Something went wrong",
                     IsSuccess = false
                 });
             }
         }
-        
-        // DELETE: api/ApiWithActions/5
+
+        /// <summary>
+        /// Delete Album
+        /// </summary>
+        /// <param name="id" type="int">Id Album</param>        
+        /// <returns>Album</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     Send Object Album
+        ///    
+        ///     DELETE api/Albums/5
+        ///     
+        /// </remarks>
+        /// <response code="200"></response>
         [HttpDelete("{id}")]
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue) return BadRequest(new BaseAPIResponse()
             {
                 IsSuccess = false,
-                Message = "Geçersiz Id Girdiniz"
+                Message = "You Have Entered Invalid Id"
             });
 
             dbContext.Albums.Remove(new Album()
@@ -169,14 +205,14 @@ namespace MusicfyAPI.Controllers
                 return Ok(new BaseAPIResponse()
                 {
                     IsSuccess = true,
-                    Message = "Başarıyla silindi"
+                    Message = "Successfully deleted"
                 });
             }
             catch (Exception)
             {
                 return BadRequest(new BaseAPIResponse()
                 {
-                    Message = "Bir hata oluştu",
+                    Message = "Something went wrong",
                     IsSuccess = false
                 });
             }

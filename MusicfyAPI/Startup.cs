@@ -55,7 +55,7 @@ namespace MusicfyAPI
                 {
                     Title = $"{ApplicationName} Api",
                     Version = DocumentVersion,
-                    Description = "Global Tool API to provide different services for legacy and new systems.",
+                    Description = "This demo was made as a technical test for DynamicDevs.",
                     Contact = new OpenApiContact
                     {
                         Name = "Documentation Project",
@@ -86,10 +86,10 @@ namespace MusicfyAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("bhl1lIyDBPPyeXj8TCLnHd1YI1NMTD6S")),
 
                     ValidateIssuer = true,
-                    ValidIssuer = "MusicDb",
+                    ValidIssuer = "Musicfy",
 
                     ValidateAudience = true,
-                    ValidAudience = "MusicDb",
+                    ValidAudience = "Musicfy",
 
                     ValidateLifetime = true, //validate the expiration and not before values in the token
 

@@ -20,8 +20,8 @@ namespace MusicfyAPI
                 new Claim(ClaimTypes.Email, Email)
             };
             var token = new JwtSecurityToken(
-                issuer: "MusicDb",
-                audience: "MusicDb",
+                issuer: "Musicfy",
+                audience: "Musicfy",
                 claims: claims,
                 notBefore: DateTime.Now,
                 expires: DateTime.Now.AddDays(28),
