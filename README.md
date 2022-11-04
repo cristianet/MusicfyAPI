@@ -28,13 +28,7 @@ dotnet restore
     options.UseSqlServer(Configuration.GetConnectionString("MusicDbConnectionString"));
 ```
 
-4. Run EF Core Migrations
-
-```
-dotnet ef database update
-```
-
-5. Run the project and Enjoy!
+4. Run the project and Enjoy!
 
 ```
 dotnet run
