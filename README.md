@@ -1,6 +1,6 @@
 # MusicfyAPI
 
-This project is able to manage your songs, artists, albums and more by RESTful API. Developed with ASP.NET Core 2.0 &amp; EF Core and used PostgreSQL Database Provider. Implemented Swagger to project.
+This project was developed as a technical test for DynamicDevs
 
 ## Getting Started
 
